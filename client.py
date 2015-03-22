@@ -1,7 +1,5 @@
 import random
 import socket
-import time
-# import pillow
 
 UDP_IP = "127.0.0.1"
 UDP_PORT = 6666
@@ -13,4 +11,4 @@ while True:
         random.choice(['rebeccapurple'])
     )
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.sendto(MESSAGE, ('192.168.1.150', 6666))
+    sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))

@@ -20,5 +20,5 @@ while True:
             message = '%s %s %s' % (i, j, color)
 
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            sock.sendto(message, ('192.168.1.150', 6666))
+            sock.sendto(message, (UDP_IP, UDP_PORT))
             time.sleep(.05)

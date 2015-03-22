@@ -18,44 +18,46 @@
 <body>
   <div class="container"></div>
 
-  <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="/socket.io-min.js"></script>
+  <script src="/jquery-min.js"></script>
   <script>
     $(document).ready(function() {
       var SIZE = 100;
       var DEFAULT_COLOR = "white";
 
-      var ct = $(".container");
+      var container = $(".container");
       var cells = [];
-      var colors = [];
       for (var y = 0; y < SIZE; y++) {
-        var cellRow = [];
-        var colorRow = [];
         var row = $("<div class='row'></div>");
         for (var x = 0; x < SIZE; x++) {
           var cell = $("<div class='cell'></div>");
           row.append(cell);
-          cellRow.push(cell);
-          colorRow.push(DEFAULT_COLOR);
         }
-        ct.append(row);
-        cells.push(cellRow);
-        colors.push(colorRow);
+        container.append(row);
+        cells.push(cell);
       }
+      
+      function setColor(color, i) {
+        cells[i].css({"background-color": color});
+      }
+
       function render(data) {
-        for (var y = 0; y < SIZE; y++) {
-          for (var x = 0; x < SIZE; x++) {
-            var newColor = data[y] && data[y][x] || DEFAULT_COLOR;
-            var oldColor = colors[y][x];
-            if (newColor !== oldColor) {
-              cells[y][x].css({"background-color": newColor});
-            }
-          }
+        data.forEach(setColor);
+      }
+
+      function update(changes) {
+        for (var i = 0, len = changes.length; i < len; i++) {
+          var parts = changes.split(" ");
+          var x = parts[0];
+          var y = parts[1];
+          var color = parts[2];
+          setColor(color, SIZE * y + x)
         }
       }
 
       var socket = io("http://localhost:7777");
-      socket.on("IMG", render);
+      socket.on("data", render);
+      socket.on("changes", update);
     });
   </script>
 </body>
