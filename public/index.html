@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>Canvas Flood Visualizer</title>
+  <style>
+    .container {
+      border: 1px solid black;
+      width: 500px;
+      margin:100px auto;
+    }
+    .cell {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container"></div>
+
+  <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var ct = $(".container");
+      var cells = [];
+      var size = 100;
+      for (var y = 0; y < size; y++) {
+        var cellRow = [];
+        var row = $("<div class='row'></div>");
+        for (var x = 0; x < size; x++) {
+          var cell = $("<div class='cell'></div>");
+          row.append(cell);
+          cellRow.push(cell);
+        }
+        ct.append(row);
+        cells.push(cellRow);
+      }
+      function render(data) {
+        console.log(data);
+        for (var y = 0; y < size; y++) {
+          for (var x = 0; x < size; x++) {
+            var color = data[y] && data[y][x];
+            cells[y][x].css({"background-color": color || "white"});
+          }
+        }
+      }
+
+      var socket = io("http://localhost:7777");
+      socket.on("IMG", render);
+    });
+  </script>
+</body>
+</html>
