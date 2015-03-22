@@ -14,7 +14,8 @@ UDP_PORT = 6666
 for i in range(width):
     for j in range(height):
         val = list(img_data[i, j])
-        color = 'rgb(%s, %s, %s)' % val
+        color = 'rgb(%d,%d,%d)' % (val[0], val[1], val[2])
+        print color
         message = '%s %s %s' % (i, j, color)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

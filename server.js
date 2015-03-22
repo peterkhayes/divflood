@@ -44,6 +44,7 @@ server.on('message', function (message, remote) {
     x_coord = Number(parts[0]);
     y_coord = Number(parts[1]);
 
+
     if (!(x_coord % 1) && x_coord < 100 && x_coord >= 0 && !(y_coord % 1) && y_coord < 100 && y_coord >= 0) {
         img_data[y_coord][x_coord] = parts[2].replace(/\s/g, '');
     }
