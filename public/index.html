@@ -22,26 +22,34 @@
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script>
     $(document).ready(function() {
+      var SIZE = 100;
+      var DEFAULT_COLOR = "white";
+
       var ct = $(".container");
       var cells = [];
-      var size = 100;
-      for (var y = 0; y < size; y++) {
+      var colors = [];
+      for (var y = 0; y < SIZE; y++) {
         var cellRow = [];
+        var colorRow = [];
         var row = $("<div class='row'></div>");
-        for (var x = 0; x < size; x++) {
+        for (var x = 0; x < SIZE; x++) {
           var cell = $("<div class='cell'></div>");
           row.append(cell);
           cellRow.push(cell);
+          colorRow.push(DEFAULT_COLOR);
         }
         ct.append(row);
         cells.push(cellRow);
+        colors.push(colorRow);
       }
       function render(data) {
-        console.log(data);
-        for (var y = 0; y < size; y++) {
-          for (var x = 0; x < size; x++) {
-            var color = data[y] && data[y][x];
-            cells[y][x].css({"background-color": color || "white"});
+        for (var y = 0; y < SIZE; y++) {
+          for (var x = 0; x < SIZE; x++) {
+            var newColor = data[y] && data[y][x] || DEFAULT_COLOR;
+            var oldColor = colors[y][x];
+            if (newColor !== oldColor) {
+              cells[y][x].css({"background-color": newColor});
+            }
           }
         }
       }
