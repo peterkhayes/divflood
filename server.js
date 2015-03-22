@@ -6,7 +6,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var SIZE = 100;
-var UPDATE = 100;
+var UPDATE = 150;
 
 for(var i = 0; i < SIZE; i++) {
     img_data.push([]);
