@@ -9,8 +9,8 @@ while True:
     MESSAGE = "%s %s %s" % (
         random.randint(0, 100),
         random.randint(0, 100),
-        random.choice(['rebeccapurple', 'black', 'blue', 'red', 'green'])
+        random.choice(['rebeccapurple'])
     )
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.sendto(MESSAGE, ('127.0.0.1', 6666))
-    time.sleep(1)
+    sock.sendto(MESSAGE, ('192.168.1.150', 6666))
+    time.sleep(.01)
