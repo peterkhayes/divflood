@@ -1,12 +1,13 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
-var publicDir = __dirname + '/../public';
+var HTTP_PORT = require("./config").HTTP_PORT;
+var publicDir = __dirname + '/../client';
 
 
 app.use(express.static(publicDir));
-server.listen(7777);
-console.log('HTTP Server listening on 0.0.0.0:7777');
+server.listen(HTTP_PORT);
+console.log('HTTP Server listening on', HTTP_PORT);
 
 require("./socket")(server);
 require("./udp");

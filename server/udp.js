@@ -1,6 +1,7 @@
 var dgram = require('dgram');
 var state = require("./state");
 var SIZE = require("./config").SIZE;
+var UDP_PORT = require("./config").UDP_PORT;
 
 var server = dgram.createSocket('udp4');
 
@@ -21,4 +22,4 @@ server.on('message', function (message, remote) {
   }
 });
 
-server.bind(6666, '0.0.0.0');
+server.bind(UDP_PORT);

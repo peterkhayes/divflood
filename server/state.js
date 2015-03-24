@@ -8,6 +8,7 @@ var data = [];
 var changes = [];
 
 var state = new EventEmitter();
+state.setMaxListeners(10000);
 state.getData = function() {
   return data;
 };

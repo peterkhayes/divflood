@@ -16,9 +16,8 @@ while True:
         for j in range(width):
             val = list(img_data[i, j])
             color = 'rgb(%d,%d,%d)' % (val[0], val[1], val[2])
-            print color
             message = '%s %s %s' % (i, j, color)
 
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             sock.sendto(message, (UDP_IP, UDP_PORT))
-            time.sleep(.05)
+            time.sleep(.001)
