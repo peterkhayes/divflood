@@ -23,4 +23,3 @@ setInterval(function() {
 }, INTERVAL);
 
 module.exports = state;
-
