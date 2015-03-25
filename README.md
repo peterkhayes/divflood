@@ -6,3 +6,7 @@
 
 ### Over the net
 * Soon to be deployed on heroku...
+
+### License
+
+divflood is MIT licenced.
